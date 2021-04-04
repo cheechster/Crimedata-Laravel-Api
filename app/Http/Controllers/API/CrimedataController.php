@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CrimedataResource;
 use App\Models\Crimedata;
 use Illuminate\Http\Request;
 
@@ -15,19 +16,13 @@ class CrimedataController extends Controller
      */
     public function index()
     {
-        //
+//        $projects = Crimedata::all();
+//        $crimedatas = Crimedata::take(100)->get();
+        $crimedatas = Crimedata::paginate(5);
+        return response([ 'crimedatas' => CrimedataResource::collection($crimedatas), 'message' => 'Retrieved successfully'], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.

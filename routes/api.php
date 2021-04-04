@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CrimedataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,12 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
-Route::get('articles', function() {
+Route::get('all', function() {
     // If the Content-Type and Accept headers are set to 'application/json',
     // this will return a JSON structure. This will be cleaned up later.
-    return Article::all();
+    return (new App\Http\Controllers\API\CrimedataController)->index();
+});
+
+Route::get('crime', function () {
+    return new \App\Http\Resources\CrimedataCollection(\App\Models\Crimedata::paginate(100));
 });
