@@ -7,7 +7,6 @@ use App\Http\Resources\CrimedataCollection;
 use App\Models\Crimedata;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class CrimedataController extends Controller
@@ -34,5 +33,17 @@ class CrimedataController extends Controller
         $data = Crimedata::where('crm_cd', $crm_cd)->paginate(100, ['LOCATION', 'cross_street', 'lat', 'lon']);
         return response($data);
     }
-    
+
+    /**
+     * Response with a listing of location data based on crime from user input.
+     *
+     * @param $area
+     * @return CrimedataCollection|Application|ResponseFactory|Response
+     */
+    public function numberCrimesByArea($area)
+    {
+        $data = Crimedata::where('area', $area)->count();
+        return response($data);
+    }
+
 }
