@@ -4,72 +4,35 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CrimedataCollection;
-use App\Http\Resources\CrimedataResource;
 use App\Models\Crimedata;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CrimedataController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return CrimedataCollection|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return CrimedataCollection|Application|ResponseFactory|Response
      */
     public function index()
     {
-//        $projects = Crimedata::all();
-//        $crimedatas = Crimedata::take(100)->get();
-//        $crimedatas = Crimedata::where('crm_cd', 110);
-//        return response(['crimedatas' => CrimedataResource::collection($crimedatas), 'message' => 'Retrieved successfully'], 200);
-//        return new CrimedataCollection((new \App\Models\Crimedata)->$crimedatas);
         $data = Crimedata::where('crm_cd', '110')->paginate(100);
         return response($data, 200);
-//        return view('phonetables',compact('data'));
     }
 
     /**
-     * Display a listing of the resource.
+     * Response with a listing of location data based on crime from user input.
      *
      * @param $crm_cd
-     * @return CrimedataCollection|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return CrimedataCollection|Application|ResponseFactory|Response
      */
     public function addressByCrime($crm_cd)
     {
         $data = Crimedata::where('crm_cd', $crm_cd)->paginate(100, ['LOCATION', 'cross_street', 'lat', 'lon']);
         return response($data);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\Crimedata $crimedata
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Crimedata $crimedata)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Crimedata $crimedata
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Crimedata $crimedata)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Models\Crimedata $crimedata
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Crimedata $crimedata)
-    {
-        //
-    }
+    
 }
