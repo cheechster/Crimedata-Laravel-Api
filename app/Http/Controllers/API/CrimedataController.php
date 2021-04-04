@@ -27,12 +27,19 @@ class CrimedataController extends Controller
 //        return view('phonetables',compact('data'));
     }
 
-    public function crimeCode($crm_cd): CrimedataCollection
+    /**
+     * Display a listing of the resource.
+     *
+     * @param $crm_cd
+     * @return CrimedataCollection|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function crimeCode($crm_cd)
     {
-
 //        return Crimedata::where('crm_cd', 110)->paginate(5));
 //        $crimedatas = Crimedata::paginate(5);
-        return new CrimedataCollection(\App\Models\Crimedata::paginate(2));
+//        return new CrimedataCollection(\App\Models\Crimedata::paginate(2));
+        $data = Crimedata::where('crm_cd', $crm_cd)->paginate(100);
+        return response($data);
 
     }
 
