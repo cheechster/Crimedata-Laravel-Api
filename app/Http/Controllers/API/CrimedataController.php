@@ -33,14 +33,10 @@ class CrimedataController extends Controller
      * @param $crm_cd
      * @return CrimedataCollection|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function crimeCode($crm_cd)
+    public function addressByCrime($crm_cd)
     {
-//        return Crimedata::where('crm_cd', 110)->paginate(5));
-//        $crimedatas = Crimedata::paginate(5);
-//        return new CrimedataCollection(\App\Models\Crimedata::paginate(2));
-        $data = Crimedata::where('crm_cd', $crm_cd)->paginate(100);
+        $data = Crimedata::where('crm_cd', $crm_cd)->paginate(100, ['LOCATION', 'cross_street', 'lat', 'lon']);
         return response($data);
-
     }
 
     /**

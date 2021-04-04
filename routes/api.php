@@ -34,6 +34,6 @@ Route::get('crime', function() {
 //});
 
 Route::get('address-by-crime/{crm_cd}', function($crm_cd) {
-    return (new App\Http\Controllers\API\CrimedataController)->crimeCode($crm_cd);
+    return (new App\Http\Controllers\API\CrimedataController)->addressByCrime($crm_cd);
 //    return new \App\Http\Resources\CrimedataCollection(\App\Models\Crimedata::paginate(100));
 });
