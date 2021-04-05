@@ -11,6 +11,13 @@ use Illuminate\Http\Response;
 
 class CrimedataController extends Controller
 {
+
+    public function checkIfInt($value){
+        if(!is_numeric($value)){
+            dd("non integer");
+        }
+    }
+
     /**
      * Response with a listing of location data based on crime from user input.
      *
@@ -19,6 +26,7 @@ class CrimedataController extends Controller
      */
     public function addressByCrime($crm_cd)
     {
+        $this->checkIfInt($crm_cd);
         $data = Crimedata::where('crm_cd', $crm_cd)->paginate(100, ['LOCATION', 'cross_street', 'lat', 'lon']);
         return response($data);
     }
@@ -31,6 +39,7 @@ class CrimedataController extends Controller
      */
     public function numberCrimesByArea($area)
     {
+        $this->checkIfInt($area);
         $data = Crimedata::where('area', $area)->count();
         return response($data);
     }
@@ -43,6 +52,7 @@ class CrimedataController extends Controller
      */
     public function numberCrimesByCrime($crm_cd)
     {
+        $this->checkIfInt($crm_cd);
         $data = Crimedata::where('crm_cd', $crm_cd)->count();
         return response($data);
     }
