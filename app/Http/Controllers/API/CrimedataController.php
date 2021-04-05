@@ -12,17 +12,6 @@ use Illuminate\Http\Response;
 class CrimedataController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return CrimedataCollection|Application|ResponseFactory|Response
-     */
-    public function index()
-    {
-        $data = Crimedata::where('crm_cd', '110')->paginate(100);
-        return response($data, 200);
-    }
-
-    /**
      * Response with a listing of location data based on crime from user input.
      *
      * @param $crm_cd
