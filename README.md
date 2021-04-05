@@ -1,11 +1,13 @@
 # Laravel API Endpoints for Crimedata
-Built using Laravel 8
+<p>Built using Laravel 8</p>
 
 ## Instructions
 <p>Install Laravel, run migrations and then run <pre>php artisan serve</pre></p>
 
 
 ## The Endpoints
+
+Explanation of data can be found here: [https://data.lacity.org/Public-Safety/Crime-Data-from-2020-to-Present/2nrs-mtv8](https://data.lacity.org/Public-Safety/Crime-Data-from-2020-to-Present/2nrs-mtv8)
 
 ### Location of crimes
 <p>Response returns all location data based on crime code. Response also includes pagination data for records over 100.</p>
